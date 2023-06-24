@@ -1,36 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import { RequiApi } from './RequiApi';
+import React, { useEffect, useContext } from 'react';
+import { RequiApi } from '../contexts/RequiApi';
+import FilterInputs from './FilterIputs';
+import GetApi from '../contexts/ContextApi';
 
 function Table() {
-  const [planets, setPlanets] = useState(null);
+  const { api, setApi, filterText } = useContext(GetApi);
   useEffect(() => {
     const fetchPlanets = async () => {
       const data = await RequiApi();
-      setPlanets(data);
+      setApi(data);
     };
-
     fetchPlanets();
-  }, []);
+  }, [setApi]);
+
+  const filteredApi = api !== null
+ && filterText !== '' ? api.filter((planet) => planet.name.includes(filterText)) : api;
+
   return (
-    <table>
-      <tbody>
-        <tr>
-          <td>name</td>
-          <td>rotation_period</td>
-          <td>orbital_period</td>
-          <td>diameter</td>
-          <td>climate</td>
-          <td>gravity</td>
-          <td>terrain</td>
-          <td>surface_water</td>
-          <td>population</td>
-          <td>films</td>
-          <td>created</td>
-          <td>edited</td>
-          <td>url</td>
-        </tr>
-        {planets !== null ? (
-          planets.map((planet, index) => (
+    <section>
+      <div>
+        <FilterInputs />
+      </div>
+      <table>
+        <tbody>
+          <tr>
+            <td>name</td>
+            <td>rotation_period</td>
+            <td>orbital_period</td>
+            <td>diameter</td>
+            <td>climate</td>
+            <td>gravity</td>
+            <td>terrain</td>
+            <td>surface_water</td>
+            <td>population</td>
+            <td>films</td>
+            <td>created</td>
+            <td>edited</td>
+            <td>url</td>
+          </tr>
+          {filteredApi && filteredApi.map((planet, index) => (
             <tr key={ index }>
               <td>{planet.name}</td>
               <td>{planet.rotation_period}</td>
@@ -46,14 +54,10 @@ function Table() {
               <td>{planet.edited}</td>
               <td>{planet.url}</td>
             </tr>
-          ))
-        ) : (
-          <tr>
-            <td>Carregando</td>
-          </tr>
-        )}
-      </tbody>
-    </table>
+          ))}
+        </tbody>
+      </table>
+    </section>
   );
 }
 
