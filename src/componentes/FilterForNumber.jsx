@@ -11,13 +11,16 @@ function FilterForNumber() {
   console.log(comparisonFilter);
 
   const handleClick = () => {
+    let simbolo;
     const filteredApi = api.filter((planet) => {
+      const planetValue = parseInt(planet[columFilter]);
+      const inputValue = parseInt(numberInput);
       if (comparisonFilter === 'maior que') {
-        return parseInt(planet.columFilter) > parseInt(numberInput);
-      } if (comparisonFilter === 'menor que') {
-        return parseInt(planet.columFilter) < parseInt(numberInput);
+        simbolo = planetValue > inputValue;
+      } else if (comparisonFilter === 'menor que') {
+        simbolo = planetValue < inputValue;
       }
-      return parseInt(planet.columFilter) === parseInt(numberInput);
+      return simbolo;
     });
     console.log(filteredApi);
   };
