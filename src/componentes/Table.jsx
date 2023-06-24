@@ -3,6 +3,7 @@ import { RequiApi } from '../contexts/RequiApi';
 import FilterInputs from './FilterIputs';
 import GetApi from '../contexts/ContextApi';
 import FilterForNumber from './FilterForNumber';
+import '../Css/Table.css';
 
 function Table() {
   const { api, setApi, filterText, filterNumber, namefiltered } = useContext(GetApi);
@@ -39,25 +40,25 @@ function Table() {
         ))
 
         : ''}
-      <table>
+      <table className="flex">
         <tbody>
-          <tr>
-            <td>name</td>
-            <td>rotation_period</td>
-            <td>orbital_period</td>
-            <td>diameter</td>
-            <td>climate</td>
-            <td>gravity</td>
-            <td>terrain</td>
-            <td>surface_water</td>
-            <td>population</td>
-            <td>films</td>
-            <td>created</td>
-            <td>edited</td>
-            <td>url</td>
+          <tr className="coluna">
+            <th>name</th>
+            <th>rotation_period</th>
+            <th>orbital_period</th>
+            <th>diameter</th>
+            <th>climate</th>
+            <th>gravity</th>
+            <th>terrain</th>
+            <th>surface_water</th>
+            <th>population</th>
+            <th>films</th>
+            <th>created</th>
+            <th>edited</th>
+            <th>url</th>
           </tr>
           { result && result.map((planet, index) => (
-            <tr key={ index }>
+            <tr key={ index } className="coluna">
               <td>{planet.name}</td>
               <td>{planet.rotation_period}</td>
               <td>{planet.orbital_period}</td>
