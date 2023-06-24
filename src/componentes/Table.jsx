@@ -5,7 +5,7 @@ import GetApi from '../contexts/ContextApi';
 import FilterForNumber from './FilterForNumber';
 
 function Table() {
-  const { api, setApi, filterText } = useContext(GetApi);
+  const { api, setApi, filterText, filterNumber } = useContext(GetApi);
   useEffect(() => {
     const fetchPlanets = async () => {
       const data = await RequiApi();
@@ -14,9 +14,17 @@ function Table() {
     fetchPlanets();
   }, [setApi]);
 
-  const filteredApi = api !== null
- && filterText !== '' ? api.filter((planet) => planet.name.includes(filterText)) : api;
+  const b = () => {
+    if (api !== null && filterText !== '' && filterNumber === '') {
+      return api.filter((planet) => planet.name.includes(filterText));
+    } if (api !== null && filterText === '' && filterNumber !== '') {
+      return filterNumber;
+    }
+    return api;
+  };
 
+  const result = b();
+  console.log('sfdsfsd', b());
   return (
     <section>
       <div>
@@ -40,7 +48,7 @@ function Table() {
             <td>edited</td>
             <td>url</td>
           </tr>
-          {filteredApi && filteredApi.map((planet, index) => (
+          { result && result.map((planet, index) => (
             <tr key={ index }>
               <td>{planet.name}</td>
               <td>{planet.rotation_period}</td>
