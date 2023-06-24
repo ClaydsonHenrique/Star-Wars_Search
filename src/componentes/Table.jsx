@@ -33,7 +33,7 @@ function Table() {
       {namefiltered.length > 0
         ? namefiltered.map((name, index) => (
           <div key={ index }>
-            <p>{name}</p>
+            <p>{`${name[0]} ${name[1]} ${name[2]}`}</p>
             <button>excluit</button>
           </div>
         ))

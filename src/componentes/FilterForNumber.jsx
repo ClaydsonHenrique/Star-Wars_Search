@@ -2,7 +2,9 @@ import React, { useContext, useState } from 'react';
 import GetApi from '../contexts/ContextApi';
 
 function FilterForNumber() {
-  const { api, setFilterNumber, namefiltered, setNamefiltered } = useContext(GetApi);
+  const {
+    api, setFilterNumber, namefiltered, setNamefiltered, filterNumber,
+  } = useContext(GetApi);
   const [columFilter, setColumnFilter] = useState('population');
   const [comparisonFilter, setComparisonFilter] = useState('maior que');
   const [numberInput, setNumberInput] = useState(0);
@@ -10,7 +12,8 @@ function FilterForNumber() {
 
   const handleClick = () => {
     let simbolo;
-    const filteredApi = api.filter((planet) => {
+    const reulst = filterNumber.length > 0 ? filterNumber : api;
+    const filteredApi = reulst.filter((planet) => {
       const planetValue = parseInt(planet[columFilter], 10);
       const inputValue = parseInt(numberInput, 10);
       if (comparisonFilter === 'maior que') {
