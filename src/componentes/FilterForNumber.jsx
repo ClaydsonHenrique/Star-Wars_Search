@@ -2,10 +2,11 @@ import React, { useContext, useState } from 'react';
 import GetApi from '../contexts/ContextApi';
 
 function FilterForNumber() {
-  const { api, setFilterNumber } = useContext(GetApi);
+  const { api, setFilterNumber, namefiltered, setNamefiltered } = useContext(GetApi);
   const [columFilter, setColumnFilter] = useState('population');
   const [comparisonFilter, setComparisonFilter] = useState('maior que');
   const [numberInput, setNumberInput] = useState(0);
+  const [allPlanets, setallPlanets] = useState([]);
 
   const handleClick = () => {
     let simbolo;
@@ -21,9 +22,12 @@ function FilterForNumber() {
       }
       return simbolo;
     });
+    const newArray = [columFilter, comparisonFilter, numberInput];
+    setNamefiltered([...namefiltered, newArray]);
+    setallPlanets([...allPlanets, filteredApi]);
     setFilterNumber(filteredApi);
   };
-
+  console.log(namefiltered);
   return (
     <div>
       <select

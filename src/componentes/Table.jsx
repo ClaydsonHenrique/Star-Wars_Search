@@ -5,7 +5,7 @@ import GetApi from '../contexts/ContextApi';
 import FilterForNumber from './FilterForNumber';
 
 function Table() {
-  const { api, setApi, filterText, filterNumber } = useContext(GetApi);
+  const { api, setApi, filterText, filterNumber, namefiltered } = useContext(GetApi);
   useEffect(() => {
     const fetchPlanets = async () => {
       const data = await RequiApi();
@@ -24,13 +24,21 @@ function Table() {
   };
 
   const result = b();
-  console.log('sfdsfsd', b());
   return (
     <section>
       <div>
         <FilterInputs />
         <FilterForNumber />
       </div>
+      {namefiltered.length > 0
+        ? namefiltered.map((name, index) => (
+          <div key={ index }>
+            <p>{name}</p>
+            <button>excluit</button>
+          </div>
+        ))
+
+        : ''}
       <table>
         <tbody>
           <tr>
