@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { RequiApi } from '../contexts/RequiApi';
 import FilterInputs from './FilterIputs';
 import GetApi from '../contexts/ContextApi';
+import FilterForNumber from './FilterForNumber';
 
 function Table() {
   const { api, setApi, filterText } = useContext(GetApi);
@@ -20,6 +21,7 @@ function Table() {
     <section>
       <div>
         <FilterInputs />
+        <FilterForNumber />
       </div>
       <table>
         <tbody>

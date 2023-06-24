@@ -6,8 +6,13 @@ import GetApi from './contexts/ContextApi';
 function App() {
   const [api, setApi] = useState(null);
   const [filterText, setFilter] = useState('');
+  const [filterNumber, setFilterNumber] = useState('');
   return (
-    <GetApi.Provider value={ { api, setApi, filterText, setFilter } }>
+    <GetApi.Provider
+      value={
+        { api, setApi, filterText, setFilter, filterNumber, setFilterNumber }
+      }
+    >
       <Table />
     </GetApi.Provider>
   );
