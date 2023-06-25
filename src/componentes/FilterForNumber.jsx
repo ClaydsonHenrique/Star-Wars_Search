@@ -30,7 +30,6 @@ function FilterForNumber() {
     setNumberInput(0);
     setclick(click + 1);
   };
-
   const number = 5;
   return (
     <div>

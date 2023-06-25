@@ -16,10 +16,8 @@ function Table() {
   }, [setApi]);
 
   const applyFilters = (planets) => {
-    // console.log(namefiltered);
     if (planets) {
       const filtros = namefiltered.map((filter) => (planet) => {
-      // console.log(planet);
         const operador = filter[1];
         const planetValue = parseFloat(planet[filter[0]]);
         const inputValue = parseFloat(filter[2]);
@@ -56,6 +54,7 @@ function Table() {
   const handerDeleteAllFilters = () => {
     setNamefiltered([]);
   };
+
   return (
     <section>
       <div>
