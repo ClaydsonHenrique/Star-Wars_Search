@@ -6,7 +6,7 @@ import FilterForNumber from './FilterForNumber';
 import '../Css/Table.css';
 
 function Table() {
-  const { api, setApi, filterText, filterNumber, namefiltered } = useContext(GetApi);
+  const { api, setApi, filterText, namefiltered } = useContext(GetApi);
   useEffect(() => {
     const fetchPlanets = async () => {
       const data = await RequiApi();
@@ -15,16 +15,42 @@ function Table() {
     fetchPlanets();
   }, [setApi]);
 
-  const b = () => {
-    if (api !== null && filterText !== '' && filterNumber === '') {
-      return api.filter((planet) => planet.name.includes(filterText));
-    } if (api !== null && filterText === '' && filterNumber !== '') {
-      return filterNumber;
+  const applyFilters = (planets) => {
+    // console.log(namefiltered);
+    if (planets) {
+      const filtros = namefiltered.map((filter) => (planet) => {
+      // console.log(planet);
+        const operador = filter[1];
+        const planetValue = parseFloat(planet[filter[0]]);
+        const inputValue = parseFloat(filter[2]);
+        if (operador === 'maior que') {
+          console.log(inputValue);
+          console.log('sfdf', planetValue);
+          console.log(planetValue > inputValue);
+          return planetValue > inputValue;
+        } if (operador === 'menor que') {
+          return planetValue < inputValue;
+        }
+        return planetValue === inputValue;
+      });
+      for (let i = 0; i < filtros.length; i += 1) {
+        planets = planets.filter(filtros[i]);
+      }
     }
-    return api;
+
+    return planets;
   };
 
+  function b() {
+    let result = api;
+    if (api && api.length > 0 && filterText !== '') {
+      result = api.filter((planet) => planet.name.includes(filterText));
+    }
+    return applyFilters(result);
+  }
+
   const result = b();
+
   return (
     <section>
       <div>
