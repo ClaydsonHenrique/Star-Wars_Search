@@ -14,6 +14,7 @@ function FilterInputs() {
         onChange={ ({ target }) => setFilter(target.value) }
       />
     </div>
+
   );
 }
 export default FilterInputs;

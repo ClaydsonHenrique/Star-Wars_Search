@@ -5,6 +5,5 @@ export const RequiApi = async () => {
     const { residents, ...rest } = result;
     return rest;
   });
-  console.log(allPlanetes);
   return allPlanetes;
 };

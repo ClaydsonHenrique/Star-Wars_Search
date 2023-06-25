@@ -1,11 +1,12 @@
-body{
-background-color: black;
-color: white;
-text-align: center;
+body {
+  background-color: black;
+  color: white;
+  text-align: center;
 }
 
-td{
-padding: 8px;
-font-size: 18px;
-border: 1px solid rgb(98, 96, 94);
+td {
+  border: 1px solid rgb(98, 96, 94);
+  font-size: 18px;
+  padding: 8px;
 }
+
