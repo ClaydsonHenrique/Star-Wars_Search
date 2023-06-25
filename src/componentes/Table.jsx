@@ -46,12 +46,14 @@ function Table() {
 
   const result = b();
 
-  const handleDelete = (index) => {
-    let filtros = namefiltered.toSpliced(index, 1);
-    if (!Array.isArray(filtros)) {
-      filtros = [];
+  const handleDelete = (param) => {
+    const filtered = [];
+    for (let index = 0; index < namefiltered.length; index += 1) {
+      if (index !== param) {
+        filtered.push(namefiltered[index]);
+      }
     }
-    setNamefiltered(filtros);
+    setNamefiltered(filtered);
   };
 
   const handerDeleteAllFilters = () => {
@@ -97,7 +99,7 @@ function Table() {
             <th>edited</th>
             <th>url</th>
           </tr>
-          { result && result.map((planet, index) => (
+          {result && result.map((planet, index) => (
             <tr key={ index } className="coluna">
               <td>{planet.name}</td>
               <td>{planet.rotation_period}</td>
