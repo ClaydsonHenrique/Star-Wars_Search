@@ -30,7 +30,8 @@ function FilterForNumber() {
     setNumberInput(0);
     setclick(click + 1);
   };
-  console.log(columFilter);
+
+  const number = 5;
   return (
     <div>
       <select
@@ -40,7 +41,7 @@ function FilterForNumber() {
       >
         {s.map((option) => (
           <option key={ option } value={ option }>
-            {click < 5 ? option : ''}
+            {click < number ? option : ''}
           </option>
         ))}
       </select>
