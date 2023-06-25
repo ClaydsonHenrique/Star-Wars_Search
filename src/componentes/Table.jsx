@@ -47,7 +47,10 @@ function Table() {
   const result = b();
 
   const handleDelete = (index) => {
-    const filtros = namefiltered.toSpliced(index, 1);
+    let filtros = namefiltered.toSpliced(index, 1);
+    if (!Array.isArray(filtros)) {
+      filtros = [];
+    }
     setNamefiltered(filtros);
   };
 
