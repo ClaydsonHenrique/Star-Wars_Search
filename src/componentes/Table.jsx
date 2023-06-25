@@ -77,7 +77,13 @@ function Table() {
         ? namefiltered.map((name, index) => (
           <div key={ index } data-testid="filter">
             <p>{`${name[0]} ${name[1]} ${name[2]}`}</p>
-            <button onClick={ () => handleDelete(index) }>exclui</button>
+            <button
+              onClick={ () => handleDelete(index) }
+              data-testid="btn-excluir"
+            >
+              exclui
+
+            </button>
           </div>
         ))
 
