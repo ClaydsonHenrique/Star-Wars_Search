@@ -69,7 +69,7 @@ function Table() {
 
         </button>
       </div>
-      {namefiltered.length > 0
+      {namefiltered && namefiltered.length > 0
         ? namefiltered.map((name, index) => (
           <div key={ index } data-testid="filter">
             <p>{`${name[0]} ${name[1]} ${name[2]}`}</p>
