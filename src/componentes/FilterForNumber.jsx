@@ -1,17 +1,36 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import GetApi from '../contexts/ContextApi';
 
 function FilterForNumber() {
   const { namefiltered, setNamefiltered } = useContext(GetApi);
-  const [columFilter, setColumnFilter] = useState('population');
+  const [columFilter, setColumnFilter] = useState('');
   const [comparisonFilter, setComparisonFilter] = useState('maior que');
   const [numberInput, setNumberInput] = useState(0);
+  const [s, setoption] = useState([]);
+  const [click, setclick] = useState(0);
 
+  useEffect(() => {
+    const filteredOptions = [
+      'population',
+      'orbital_period',
+      'diameter',
+      'rotation_period',
+      'surface_water',
+    ].filter((option) => !namefiltered.some((name) => name[0] === option));
+
+    if (filteredOptions.length > 0 && !filteredOptions.includes(columFilter)) {
+      setColumnFilter(filteredOptions[0]);
+      setoption(filteredOptions);
+    }
+  }, [namefiltered, columFilter]);
   const handleClick = () => {
     const newArray = [columFilter, comparisonFilter, numberInput];
     setNamefiltered([...namefiltered, newArray]);
+    setColumnFilter('');
+    setNumberInput(0);
+    setclick(click + 1);
   };
-
+  console.log(columFilter);
   return (
     <div>
       <select
@@ -19,11 +38,11 @@ function FilterForNumber() {
         value={ columFilter }
         onChange={ ({ target }) => setColumnFilter(target.value) }
       >
-        <option value="population">population</option>
-        <option value="orbital_period">orbital_period</option>
-        <option value="diameter">diameter</option>
-        <option value="rotation_period">rotation_period</option>
-        <option value="surface_water">surface_water</option>
+        {s.map((option) => (
+          <option key={ option } value={ option }>
+            {click < 5 ? option : ''}
+          </option>
+        ))}
       </select>
       <select
         data-testid="comparison-filter"
@@ -40,8 +59,11 @@ function FilterForNumber() {
         data-testid="value-filter"
         onChange={ ({ target }) => setNumberInput(target.value) }
       />
-      <button data-testid="button-filter" onClick={ handleClick }>filtro</button>
+      <button data-testid="button-filter" onClick={ handleClick }>
+        filtro
+      </button>
     </div>
   );
 }
+
 export default FilterForNumber;

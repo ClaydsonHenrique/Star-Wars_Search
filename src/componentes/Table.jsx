@@ -6,7 +6,7 @@ import FilterForNumber from './FilterForNumber';
 import '../Css/Table.css';
 
 function Table() {
-  const { api, setApi, filterText, namefiltered } = useContext(GetApi);
+  const { api, setApi, filterText, namefiltered, setNamefiltered } = useContext(GetApi);
   useEffect(() => {
     const fetchPlanets = async () => {
       const data = await RequiApi();
@@ -24,9 +24,6 @@ function Table() {
         const planetValue = parseFloat(planet[filter[0]]);
         const inputValue = parseFloat(filter[2]);
         if (operador === 'maior que') {
-          console.log(inputValue);
-          console.log('sfdf', planetValue);
-          console.log(planetValue > inputValue);
           return planetValue > inputValue;
         } if (operador === 'menor que') {
           return planetValue < inputValue;
@@ -51,17 +48,32 @@ function Table() {
 
   const result = b();
 
+  const handleDelete = (index) => {
+    const filtros = namefiltered.toSpliced(index, 1);
+    setNamefiltered(filtros);
+  };
+
+  const handerDeleteAllFilters = () => {
+    setNamefiltered([]);
+  };
   return (
     <section>
       <div>
         <FilterInputs />
         <FilterForNumber />
+        <button
+          onClick={ handerDeleteAllFilters }
+          data-testid="button-remove-filters"
+        >
+          remover tudo
+
+        </button>
       </div>
       {namefiltered.length > 0
         ? namefiltered.map((name, index) => (
-          <div key={ index }>
+          <div key={ index } data-testid="filter">
             <p>{`${name[0]} ${name[1]} ${name[2]}`}</p>
-            <button>excluit</button>
+            <button onClick={ () => handleDelete(index) }>exclui</button>
           </div>
         ))
 
