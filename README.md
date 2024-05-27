@@ -14,8 +14,8 @@ Instalação
     Clone o repositório e instale as dependências:
 
     bash
+Clone o projeto
 
-git clone https://github.com/seu-usuario/star-wars-planets-filter.git
 cd star-wars-planets-filter
 npm install
 
